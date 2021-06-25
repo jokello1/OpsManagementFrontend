@@ -1,23 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useRouteMatch,
+} from "react-router-dom";
+import UserComponent from "./component/UserComponent";
+import DepartmentComponent from "./component/DepartmentComponet";
+import HeaderComponent from "./component/HeaderComponent";
+import CreateUserComponent from "./component/CreateUserComponent";
+import CreateDepartmentComponent from "./component/CreateDepartmentComponent";
+import UpdateDepartmentComponent from "./component/UpdateDepartmentComponent";
+import UpdateUserComponent from "./component/UpdateUserComponent";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <div className="row">
+          <HeaderComponent />
+        </div>
+        <div className="container">
+          <Switch>
+            <Route path="/" exact component={DepartmentComponent}></Route>
+            <Route path="/users/:id" component={UserComponent}></Route>
+            <Route
+              path="/createUsers/:id"
+              component={CreateUserComponent}
+            ></Route>
+            <Route
+              path="/updateDepartment/:id"
+              component={UpdateDepartmentComponent}
+            ></Route>
+            <Route
+              path="/updateUser/:id"
+              component={UpdateUserComponent}
+            ></Route>
+            <Route
+              path="/createDepartment"
+              component={CreateDepartmentComponent}
+            ></Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
