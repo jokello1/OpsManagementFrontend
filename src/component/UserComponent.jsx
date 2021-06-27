@@ -1,5 +1,6 @@
 import React from "react";
 import UserService from "../services/UserService";
+import { Button } from '@material-ui/core';
 
 class UserComponent extends React.Component {
   constructor(props) {
@@ -25,6 +26,8 @@ class UserComponent extends React.Component {
   }
   deleteUser(id) {
     UserService.deleteUser(id).then((res) => {
+      const data = this.state.users.filter(i => i.id !== id)
+      this.setState({users: data})
       this.props.history.push("/users/" + this.state.id);
     });
   }
@@ -33,25 +36,26 @@ class UserComponent extends React.Component {
       <div>
         <h1 className="text-center">Users List</h1>
         <div className="row">
-          <button className="btn btn-primary" onClick={this.addUser}>
+          <Button variant="contained" color="primary" className="btn btn-primary" onClick={this.addUser}>
             Add User
-          </button>
+          </Button>
         </div>
         <table className="table table-stripped table-bordered">
           <thead>
             <tr>
-              <td>User Id</td>
-              <td>User Name</td>
-              <td>User Phone</td>
-              <td>User Date of Birth</td>
-              <td>User Email</td>
-              <td>User profession</td>
-              <td>User creationDate</td>
-              <td>Actions</td>
+              <th>User Id</th>
+              <th>User Name</th>
+              <th>User Phone</th>
+              <th>User Date of Birth</th>
+              <th>User Email</th>
+              <th>User profession</th>
+              <th>User creationDate</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {this.state.users.map((u) => (
+          {this.state.users.map((u) => (
+              
               <tr key={u.id}>
                 <td>{u.id}</td>
                 <td>{u.name}</td>
@@ -61,24 +65,24 @@ class UserComponent extends React.Component {
                 <td>{u.profession}</td>
                 <td>{u.creationDate}</td>
                 <td>
-                  <td>
+                  
                     <button
                       onClick={() => this.updateUser(u.id)}
                       className="btn btn-info"
                     >
                       update
                     </button>
-                  </td>
-                  <td>
+                  
                     <button
                       onClick={() => this.deleteUser(u.id)}
                       className="btn btn-danger"
                     >
                       Delete
                     </button>
-                  </td>
+                  
                 </td>
               </tr>
+              
             ))}
           </tbody>
         </table>

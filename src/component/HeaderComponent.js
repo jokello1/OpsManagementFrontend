@@ -11,7 +11,7 @@ class HeaderComponent extends React.Component {
       <div>
         <header>
           <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-            <div className="navbar-brand"> Management App </div>
+            <div className="navbar-brand" style={{marginLeft: '10px'}}> Management App </div>
           </nav>
         </header>
       </div>

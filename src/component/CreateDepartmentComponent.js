@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import DepartmentService from "../services/DepartmentService";
 
 class CreateDepartmentComponent extends React.Component {
@@ -22,14 +21,12 @@ class CreateDepartmentComponent extends React.Component {
   cancel() {
     this.props.history.push("/department");
   }
-  saveDepartment = (e) => {
+  saveDepartment(e){
     e.preventDefault();
     let department = {
       name: this.state.name,
       description: this.state.description,
     };
-    console.log("Department =>" + JSON.stringify(department));
-
     DepartmentService.createDepartment(department).then((res) => {
       this.props.history.push("/");
     });

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import DepartmentService from "../services/DepartmentService";
 
 class UpdateDepartmentComponent extends React.Component {
@@ -9,6 +8,7 @@ class UpdateDepartmentComponent extends React.Component {
       id: this.props.match.params.id,
       name: "",
       description: "",
+      creationDate: ""
     };
     this.changeNamesHandler = this.changeNamesHandler.bind(this);
     this.changeDescriptionHandler = this.changeDescriptionHandler.bind(this);
@@ -23,12 +23,13 @@ class UpdateDepartmentComponent extends React.Component {
   cancel() {
     this.props.history.push("/department");
   }
-  updateDepartment = (e) => {
+  updateDepartment(e){
     e.preventDefault();
     let department = {
       id: this.state.id,
-      name: this.state.name,
+      name: this.state.names,
       description: this.state.description,
+      creationDate: this.state.creationDate
     };
     console.log("Department =>" + JSON.stringify(department));
 
@@ -44,6 +45,7 @@ class UpdateDepartmentComponent extends React.Component {
       this.setState({
         names: department.name,
         description: department.description,
+        creationDate: department.creationDate,
       });
     });
   }

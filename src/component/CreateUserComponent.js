@@ -48,8 +48,6 @@ class CreateUserComponent extends React.Component {
       profession: this.state.profession,
       departmentId: this.state.departmentId,
     };
-    console.log("employee =>" + JSON.stringify(users));
-
     UserService.createUser(users).then((res) => {
       this.props.history.push("/users/" + this.state.departmentId);
     });

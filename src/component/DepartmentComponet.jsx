@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import DepartmentService from "../services/DepartmentService";
+import { Button } from '@material-ui/core';
 
 class DepartmentComponent extends React.Component {
   constructor(props) {
@@ -29,6 +29,8 @@ class DepartmentComponent extends React.Component {
   }
   deleteDepartment(id) {
     DepartmentService.deleteDepartment(id).then((res) => {
+      const data = this.state.departments.filter(i => i.id !== id)
+      this.setState({departments: data})
       this.props.history.push("/");
     });
   }
@@ -37,56 +39,56 @@ class DepartmentComponent extends React.Component {
       <div>
         <h1 className="text-center">Departments List</h1>
         <div className="row">
-          <button className="btn btn-info" onClick={this.addDepartment}>
+          <Button variant="contained" color="primary" onClick={this.addDepartment}>
             Add Department
-          </button>
+          </Button>
         </div>
         <table className="table table-stripped">
           <thead>
             <tr>
-              <td>Department Id</td>
-              <td>Department Name</td>
-              <td>Department description</td>
-              <td>Department creationDate</td>
-              <td>Actions</td>
+              <th>Department Id</th>
+              <th>Department Name</th>
+              <th>Department description</th>
+              <th>Department creationDate</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {this.state.departments.map((department) => (
+          {this.state.departments.map((department) => (
+              
               <tr key={department.id}>
                 <td>{department.id}</td>
                 <td>{department.name}</td>
                 <td>{department.description}</td>
                 <td>{department.creationDate}</td>
                 <td>
-                  <td>
+                  
                     <button
                       onClick={() => this.departmentUsers(department.id)}
                       className="btn btn-success"
                     >
                       Users
                     </button>
-                  </td>
-                  <td>
+                  
                     <button
                       onClick={() => this.updateDepartment(department.id)}
                       className="btn btn-info"
                     >
                       update
                     </button>
-                  </td>
-                  <td>
+                  
                     <button
                       onClick={() => this.deleteDepartment(department.id)}
                       className="btn btn-danger"
                     >
                       Delete
                     </button>
-                  </td>
+                  
                 </td>
               </tr>
-            ))}
-          </tbody>
+              
+          ))}
+            </tbody>
         </table>
       </div>
     );

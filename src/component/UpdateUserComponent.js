@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import UserService from "../services/UserService";
 
 class UpdateUserComponent extends React.Component {
@@ -21,19 +20,19 @@ class UpdateUserComponent extends React.Component {
     this.changeDobHandler = this.changeDobHandler.bind(this);
     this.updateUser = this.updateUser.bind(this);
   }
-  changeNamesHandler = (event) => {
+  changeNamesHandler=(event)=>{
     this.setState({ name: event.target.value });
   };
-  changePhoneHandler = (event) => {
+  changePhoneHandler=(event)=>{
     this.setState({ phone: event.target.value });
   };
-  changeDobHandler = (event) => {
+  changeDobHandler=(event)=>{
     this.setState({ dob: event.target.value });
   };
-  changeEmailHandler = (event) => {
+  changeEmailHandler=(event)=>{
     this.setState({ email: event.target.value });
   };
-  changeProfessionHandler = (event) => {
+  changeProfessionHandler=(event)=>{
     this.setState({ profession: event.target.value });
   };
 
@@ -54,7 +53,7 @@ class UpdateUserComponent extends React.Component {
       });
     });
   }
-  updateUser = (e) => {
+  updateUser=(e)=>{
     e.preventDefault();
     let user = {
       id: this.state.id,
@@ -66,10 +65,8 @@ class UpdateUserComponent extends React.Component {
       departmentId: this.state.departmentId,
       creationDate: this.state.creationDate,
     };
-    console.log("employee =>" + JSON.stringify(user));
-
     UserService.updateUser(user.id, user).then((res) => {
-      console.log(res);
+      
       this.props.history.push("/users/" + this.state.departmentId);
     });
   };
@@ -99,7 +96,7 @@ class UpdateUserComponent extends React.Component {
                       placeholder="071.."
                       name="phone"
                       className="form-control"
-                      value={this.state.phone}
+                      value={this.state.phone||""}
                       onChange={this.changePhoneHandler}
                     />
                   </div>
@@ -109,7 +106,7 @@ class UpdateUserComponent extends React.Component {
                       placeholder="mm-dd-yy"
                       name="dob"
                       className="form-control"
-                      value={this.state.dob}
+                      value={this.state.dob||""}
                       onChange={this.changeDobHandler}
                     />
                   </div>
@@ -119,7 +116,7 @@ class UpdateUserComponent extends React.Component {
                       placeholder="email"
                       name="email"
                       className="form-control"
-                      value={this.state.email}
+                      value={this.state.email||""}
                       onChange={this.changeEmailHandler}
                     />
                   </div>
