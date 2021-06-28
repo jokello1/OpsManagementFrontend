@@ -23,7 +23,7 @@ class UpdateDepartmentComponent extends React.Component {
   cancel() {
     this.props.history.push("/department");
   }
-  updateDepartment(e){
+  updateDepartment=(e)=>{
     e.preventDefault();
     let department = {
       id: this.state.id,
@@ -31,8 +31,6 @@ class UpdateDepartmentComponent extends React.Component {
       description: this.state.description,
       creationDate: this.state.creationDate
     };
-    console.log("Department =>" + JSON.stringify(department));
-
     DepartmentService.updateDepartment(department.id, department).then(
       (res) => {
         this.props.history.push("/");
